@@ -1,0 +1,109 @@
+aid: trust-payments
+name: Trust Payments
+review:
+  question: Does Trust Payments publish a public developer portal with a downloadable OpenAPI/Swagger definition?
+  answer: false
+  date: '2026-07-24'
+  reviewer: API Evangelist
+  homeMarket: United Kingdom
+  tier: gateway-psp
+findings:
+  summary: |
+    Trust Payments (formerly Secure Trading / SecureTrading) exposes a real,
+    documented API surface but does NOT publish a self-serve developer portal on a
+    developer.* subdomain, nor a downloadable OpenAPI/Swagger definition. The public
+    developer documentation lives in the Trust Payments help centre (Zendesk) under
+    the "TRU Connect" and "Webservices API" guides. Zero OpenAPI/Swagger specs were
+    harvested because none are published; the enterprise REST portal referenced in
+    third-party search results (ep.trustpayments.com/doc) does not resolve publicly
+    (NXDOMAIN) and is an enterprise-gated host.
+
+    The core surface is the Secure Trading Payment Platform (STPP): a server-to-server
+    JSON Webservices API, a JWT-authenticated client-side JavaScript Library (ST.js /
+    js-payments) for hosted card fields and tokenisation, and mobile SDKs. Official
+    client libraries (Python, PHP, ReactJS, iOS/Swift) are published under the
+    SecureTrading GitHub organisation. Production Webservices access is gated behind
+    PCI certification, account approval, and credential/key exchange.
+  developerPortal:
+    url: https://help.trustpayments.com/hc/en-us
+    status: 200
+    confirmed: true
+    note: Help centre (Zendesk) hosts the TRU Connect / Webservices API guides. No dedicated developer.* subdomain.
+  openApiHarvested: false
+  specsCount: 0
+  authModel:
+    webservices: Webservices API alias (username) + password scoped to a site reference, over TLS; production requires PCI certification and key exchange.
+    javascriptLibrary: JSON Web Token (JWT) generated server-side authorises client-side hosted-field / tokenisation requests.
+  webhooksEvents:
+    note: Trust Payments supports URL notifications / transaction callbacks configured in the MyST portal; no public AsyncAPI or event catalog is published. Not modelled to avoid fabrication.
+  postman:
+    url: https://www.postman.com/trustpayments
+    status: 200
+    note: A Postman handle resolves, but no specific public collection could be verified anonymously; not listed as a property to avoid fabrication.
+  transports:
+    - protocol: REST/JSON
+      scheme: https
+      baseURL: https://webservices.securetrading.net/json/
+      documented: true
+      note: Server-to-server STPP JSON Webservices API. Host returns 401 anonymously (auth-gated), confirming it exists.
+    - protocol: JavaScript-Library
+      scheme: https
+      documented: true
+      note: Client-side ST.js hosted fields authorised by server-generated JWT.
+    - protocol: OpenAPI
+      documented: false
+      note: No downloadable OpenAPI/Swagger definition is published on any reachable host.
+  requestTypesConfirmed:
+    - AUTH
+    - ACCOUNTCHECK
+    - REFUND
+    - SUBSCRIPTION
+    - TRANSACTIONUPDATE
+    - TRANSACTIONQUERY
+  hostsProbed:
+    - url: https://www.trustpayments.com/
+      status: 200
+    - url: https://www.trustpayments.com/products/api/
+      status: 200
+    - url: https://help.trustpayments.com/hc/en-us
+      status: 200
+    - url: https://help.trustpayments.com/hc/en-us/sections/360005821218-Webservices-API
+      status: 200
+    - url: https://webservices.securetrading.net/json/
+      status: 401
+    - url: https://webservices.securetrading.net/
+      status: 403
+    - url: https://myst.trustpayments.com/
+      status: 200
+    - url: https://status.trustpayments.com/
+      status: 200
+    - url: https://github.com/SecureTrading
+      status: 200
+    - url: https://developer.trustpayments.com
+      status: 000
+      note: Does not resolve.
+    - url: https://docs.trustpayments.com
+      status: 000
+      note: Does not resolve.
+    - url: https://ep.trustpayments.com/doc
+      status: 000
+      note: NXDOMAIN — enterprise REST portal referenced by third parties does not resolve publicly.
+sources:
+  - url: https://www.trustpayments.com/products/api/
+    type: ProductPage
+    note: Web Payments / Payment Gateway API product overview.
+  - url: https://help.trustpayments.com/hc/en-us/sections/360005821218-Webservices-API
+    type: Documentation
+    note: Webservices API guide (install library, process payments/refunds, response handling, 3-D Secure).
+  - url: https://help.trustpayments.com/hc/en-us/articles/11569681677713-Webservices-API-Guide-for-POS-developers
+    type: APIReference
+    note: JSON request/response examples; AUTH, REFUND, TRANSACTIONUPDATE, TRANSACTIONQUERY; alias + site reference auth.
+  - url: https://help.trustpayments.com/hc/en-us/articles/4402754655761--Install-our-library
+    type: Documentation
+    note: Python (securetrading) and PHP (stpp_json) libraries; cURL alternative; GitHub st-python-api.
+  - url: https://help.trustpayments.com/hc/en-us/articles/4402771924497-Payouts-with-Webservices-API
+    type: Documentation
+    note: Payouts via Webservices API.
+  - url: https://github.com/SecureTrading
+    type: SourceCode
+    note: Official SDKs — st-python-api, PHP-API, reactjs-payments, js-payments-card, swift-payments.
