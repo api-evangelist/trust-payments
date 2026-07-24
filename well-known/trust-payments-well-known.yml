@@ -1,0 +1,23 @@
+generated: '2026-07-24'
+method: searched
+note: >-
+  Probed the standard /.well-known/ discovery surface on the API host, docs host, and
+  marketing host. Trust Payments publishes no well-known discovery documents; the API
+  host returns 403 (WAF) and the others 404. Recorded for auditability - no WellKnown
+  or SecurityTxt pointer is wired because nothing was found.
+hosts:
+  - host: https://webservices.securetrading.net
+    documents:
+      - {path: /.well-known/security.txt, status: 403}
+      - {path: /.well-known/openid-configuration, status: 403}
+      - {path: /.well-known/oauth-authorization-server, status: 403}
+  - host: https://help.trustpayments.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+  - host: https://www.trustpayments.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}

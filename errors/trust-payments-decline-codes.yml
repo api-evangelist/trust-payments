@@ -1,0 +1,40 @@
+generated: '2026-07-24'
+method: searched
+source: https://help.trustpayments.com/hc/en-us/articles/4402897300625-Error-codes
+docs: https://webapp.securetrading.net/errorcodes.html
+note: >-
+  Trust Payments STPP does not expose a separate ISO-8583 decline-code field; the
+  authorisation outcome is carried on the numeric errorcode plus the settlestatus.
+  errorcode 70000 = declined by the card issuer; a settlestatus of 3 with errorcode
+  70000 additionally signals a card-scheme stop on recurring payments. Buyers are
+  shown a generic message (errorcode 99998 / errormessage) rather than the raw
+  decline reason; the specific errorcode is returned to the integrating merchant.
+envelope_field: errorcode
+settlement_field: settlestatus
+masked_to_buyer: true
+buyer_generic_code: '99998'
+settlestatus_values:
+  - {value: '0', meaning: Authorised, pending settlement (no action required)}
+  - {value: '1', meaning: Authorised, pending settlement}
+  - {value: '2', meaning: Suspended / settlement on hold}
+  - {value: '3', meaning: Cancelled / error occurred and payment cancelled}
+  - {value: '10', meaning: Authorised, pending settlement}
+  - {value: '100', meaning: Settled - funds settled into the merchant account}
+decline_codes:
+  - {code: '70000', meaning: Decline - payment declined by the card issuer, action: Do not retry with the same card; ask the customer for another payment method. settlestatus 3 + 70000 means a scheme stop on recurring payments.}
+  - {code: '70001', meaning: Uncertain result, action: Treat as unsuccessful; query the transaction later to confirm final status.}
+  - {code: '71000', meaning: Soft Decline - issuer requires Strong Customer Authentication (SCA), action: Re-attempt through 3-D Secure (THREEDQUERY) to satisfy PSD2 SCA, then resubmit.}
+  - {code: '72000', meaning: Refer to Issuer, action: Instruct the cardholder to contact their card issuer; do not retry.}
+  - {code: '60042', meaning: Insufficient funds, action: Ask the customer for an alternative payment method.}
+  - {code: '60043', meaning: Unable to process due to scheme restrictions, action: Payment blocked by card-scheme rules; use another method.}
+  - {code: '60045', meaning: Unable to process due to restrictions, action: Payment blocked by configured restrictions; use another method.}
+  - {code: '60500', meaning: Risk Referral, action: Held for manual risk review; check MyST for the outcome.}
+  - {code: '60036', meaning: Max fraudscore exceeded, action: Blocked by fraud scoring; do not retry automatically.}
+  - {code: '60044', meaning: Failed Screening, action: Blocked by screening rules.}
+  - {code: '30002', meaning: Banned card, action: Card is on a block list; use another card.}
+  - {code: '60034', meaning: Manual investigation required, action: Outcome unknown; query the transaction later, do not resubmit blindly.}
+  - {code: '60010', meaning: Bank System Error, action: Final status not known; query the transaction before retrying.}
+  - {code: '60038', meaning: Merchant System Error, action: Final status not known; investigate configuration.}
+  - {code: '88000', meaning: Generic Retry, action: Transient - safe to retry the request.}
+  - {code: '88888', meaning: Soft Decline retry, action: Retry after completing SCA / soft-decline handling.}
+  - {code: '79000', meaning: Request is queued - check the transaction later for the status, action: Poll TRANSACTIONQUERY for the final outcome.}

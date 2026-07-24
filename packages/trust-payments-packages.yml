@@ -1,0 +1,68 @@
+generated: '2026-07-24'
+method: searched
+source: https://github.com/SecureTrading
+note: >-
+  First-party client libraries for the Secure Trading Payment Platform (STPP) /
+  Trust Payments Webservices API, published under the SecureTrading GitHub
+  organisation and mirrored to public package registries. Server-side SDKs (Python,
+  PHP) build STPP JSON requests; browser packages back the JavaScript Library
+  (ST.js) hosted-fields / payment-card experience.
+packages:
+  - language: python
+    registry: pypi
+    name: securetrading
+    version: 1.0.26
+    url: https://pypi.org/project/securetrading/
+    repo: https://github.com/SecureTrading/st-python-api
+    install: pip install securetrading
+    official: true
+    description: Python API to connect to Secure Trading / Trust Payments STPP.
+  - language: php
+    registry: packagist
+    name: securetrading/stpp_json
+    url: https://packagist.org/packages/securetrading/stpp_json
+    repo: https://github.com/SecureTrading/PHP-API
+    install: composer require securetrading/stpp_json
+    official: true
+    description: >-
+      Allows payment processing through Secure Trading's STPP (JSON) interface.
+      Part of a modular set (securetrading/config, data, exception, http, ioc,
+      loader, log, unittest).
+  - language: javascript
+    registry: npm
+    name: "@trustpayments/js-payments-card"
+    url: https://www.npmjs.com/package/@trustpayments/js-payments-card
+    official: true
+    description: TypeScript animated payment card companion for the JavaScript Library.
+  - language: javascript
+    registry: npm
+    name: "@trustpayments/jwt-generator"
+    url: https://www.npmjs.com/package/@trustpayments/jwt-generator
+    official: true
+    description: Generator of the JSON Web Token (JWT) used to authorise ST.js client-side requests.
+  - language: javascript
+    registry: npm
+    name: "@trustpayments/ts-iin-lookup"
+    url: https://www.npmjs.com/package/@trustpayments/ts-iin-lookup
+    official: true
+    description: IIN/BIN lookup to determine the card type client-side.
+  - language: javascript
+    registry: npm
+    name: "@trustpayments/ts-luhn-check"
+    url: https://www.npmjs.com/package/@trustpayments/ts-luhn-check
+    official: true
+    description: Luhn validation of card numbers.
+  - language: swift
+    registry: github
+    name: swift-payments
+    url: https://github.com/SecureTrading/swift-payments
+    repo: https://github.com/SecureTrading/swift-payments
+    official: true
+    description: iOS / Swift SDK for the JavaScript Library payment flow (archived).
+  - language: javascript
+    registry: github
+    name: reactjs-payments
+    url: https://github.com/SecureTrading/reactjs-payments
+    repo: https://github.com/SecureTrading/reactjs-payments
+    official: true
+    description: ReactJS implementation of the ST.js Library (archived).

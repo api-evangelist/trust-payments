@@ -1,0 +1,44 @@
+generated: '2026-07-24'
+method: searched
+source: https://www.trustpayments.com/security/
+docs: https://help.trustpayments.com/hc/en-us
+note: >-
+  Industry and cross-cutting standards the Trust Payments Webservices API / gateway
+  conforms to. Payments-sector standards are asserted from Trust Payments' published
+  security page and Webservices documentation; general REST/OpenAPI conventions are
+  not applicable because the STPP surface is a custom JSON RPC-style envelope, not a
+  resource-oriented REST API with an OpenAPI spec.
+standards:
+  - id: pci-dss
+    conforms: true
+    evidence: >-
+      Security page documents quarterly Qualys PCI Platform scanning by an independent
+      QSA (Omnicybersecurity UK / Forgenix US); production Webservices access requires
+      the merchant to hold PCI certification. Trust Payments operates as a PCI-compliant
+      acquirer/gateway.
+  - id: psd2-sca
+    conforms: true
+    evidence: >-
+      Soft-decline errorcode 71000 signals issuer SCA requirement; THREEDQUERY / 3-D
+      Secure flow provided to satisfy PSD2 Strong Customer Authentication.
+  - id: 3d-secure-2
+    conforms: true
+    evidence: 3DS v2.2.0 test cards and 3DS Server testing resources published; THREEDQUERY request type.
+  - id: tls
+    conforms: true
+    evidence: Minimum TLS 1.2 between merchant and datacentres; AES-256 data encryption (security page). Live probe shows TLS 1.3 on webservices.securetrading.net.
+  - id: tokenization
+    conforms: true
+    evidence: JavaScript Library hosted fields tokenise card data; TRU Connect tokenisation and recurring billing.
+  - id: emv-3ds
+    conforms: true
+    evidence: EMV 3-D Secure 2.2.0 authentication supported (Cardinal Commerce + Trust Payments 3DS server).
+  - id: oauth2
+    conforms: false
+    evidence: Webservices API uses alias/password credentials + JWT (JS Library), not OAuth 2.0.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors are returned as a numeric errorcode/errormessage envelope, not application/problem+json.
+  - id: openapi
+    conforms: false
+    evidence: No OpenAPI/Swagger definition is published; the surface is documentation-and-SDK driven.

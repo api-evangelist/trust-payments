@@ -1,0 +1,37 @@
+generated: '2026-07-24'
+method: searched
+source: https://help.trustpayments.com/hc/en-us
+docs:
+  - https://help.trustpayments.com/hc/en-us/articles/4402754655761--Install-our-library
+  - https://help.trustpayments.com/hc/en-us/articles/4403721496849-Getting-started-with-Payment-Pages
+note: >-
+  Client-side / embeddable payment surfaces distinct from the server-side SDKs in
+  packages/. These reduce merchant PCI scope by keeping raw card data in
+  Trust-Payments-hosted fields.
+families:
+  - name: JavaScript Library (ST.js)
+    kind: embedded-fields
+    description: >-
+      Drop-in JavaScript Library that renders hosted, PCI-reduced card-input fields
+      inside the merchant page and tokenises the card in the browser, authorised by a
+      server-generated JWT. Raw card data never touches the merchant server.
+    loader: js-payments (ST.js) library; installed via "Install our library".
+    companions:
+      - "@trustpayments/js-payments-card (animated card UI)"
+      - "@trustpayments/jwt-generator"
+      - "@trustpayments/ts-iin-lookup"
+      - "@trustpayments/ts-luhn-check"
+  - name: Payment Pages
+    kind: hosted-checkout
+    description: >-
+      Trust-Payments-hosted payment page (redirect / hosted checkout) for merchants
+      who want a fully hosted card-entry experience with minimal integration.
+    docs: https://help.trustpayments.com/hc/en-us/articles/4403721496849-Getting-started-with-Payment-Pages
+  - name: ReactJS Library
+    kind: framework-binding
+    description: ReactJS implementation of the ST.js Library (SecureTrading/reactjs-payments, archived).
+    repo: https://github.com/SecureTrading/reactjs-payments
+  - name: Mobile SDK (iOS/Swift)
+    kind: mobile-embedded
+    description: iOS/Swift SDK wrapping the JavaScript Library payment flow for native apps (archived).
+    repo: https://github.com/SecureTrading/swift-payments

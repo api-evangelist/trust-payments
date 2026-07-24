@@ -1,0 +1,39 @@
+generated: '2026-07-24'
+method: searched
+source: https://help.trustpayments.com/hc/en-us/articles/11569681677713-Webservices-API-Guide-for-POS-developers
+docs: https://help.trustpayments.com/hc/en-us/sections/360005821218-Webservices-API
+note: >-
+  Trust Payments does not publish an OpenAPI definition, so this profile is derived
+  from the published Webservices API and JavaScript Library documentation rather
+  than from spec securitySchemes. Two distinct authentication models exist:
+  server-to-server alias + password credentials for the Webservices (STPP) JSON API,
+  and a server-generated JWT for the client-side JavaScript Library.
+summary:
+  types: [credentials, jwt]
+  api_key_in: [body]
+  oauth2_flows: []
+schemes:
+  - name: WebservicesCredentials
+    type: credentials
+    scheme: alias-password
+    location: request body
+    fields:
+      alias: Webservices API username (e.g. an email-style alias) supplied on the outer JSON request.
+      password: Webservices API password paired with the alias (exchanged during onboarding; not self-serve).
+      sitereference: Site identifier that also selects the test vs live environment.
+    transport: HTTPS POST to https://webservices.securetrading.net/json/
+    notes: >-
+      Production Webservices access requires PCI certification, account approval, and
+      credential (key) exchange. The alias/password pair is scoped to one or more
+      sitereferences; a test sitereference targets the test bank.
+  - name: JavaScriptLibraryJWT
+    type: jwt
+    scheme: bearer
+    bearerFormat: JWT
+    location: client-side request generated server-side
+    notes: >-
+      The JavaScript Library (ST.js) authorises browser-side tokenisation and hosted
+      card fields with a JSON Web Token minted on the merchant server (see the
+      @trustpayments/jwt-generator package), keeping raw card data off the merchant
+      server and reducing PCI scope. JWT signing uses a site-specific secret; errorcodes
+      10300-10302 cover JWT decode/encode/algorithm failures.

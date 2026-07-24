@@ -1,0 +1,58 @@
+generated: '2026-07-24'
+method: searched
+source: https://help.trustpayments.com/hc/en-us/articles/11569681677713-Webservices-API-Guide-for-POS-developers
+docs: https://help.trustpayments.com/hc/en-us/sections/360005821218-Webservices-API
+note: >-
+  Cross-cutting request/response semantics for the Trust Payments Webservices API
+  (STPP JSON). Derived from the published developer documentation; Trust Payments
+  publishes no OpenAPI. Cross-links: authentication/, errors/, lifecycle/, asyncapi/.
+authentication:
+  style: alias + password credentials scoped to a sitereference (server-to-server); JWT for the client-side JavaScript Library.
+  ref: authentication/trust-payments-authentication.yml
+request_envelope:
+  transport: HTTPS POST (JSON) to https://webservices.securetrading.net/json/
+  shape: >-
+    Outer object carries alias, version ("1.00"), and a request[] array; each element
+    sets requesttypedescriptions (e.g. ["AUTH"]), sitereference, and request-specific
+    fields. Multiple request types can be chained in one request[] array.
+  request_types: [AUTH, ACCOUNTCHECK, REFUND, SUBSCRIPTION, TRANSACTIONUPDATE, TRANSACTIONQUERY, THREEDQUERY, REVERSAL, SCHEMEUPDATE]
+  version_field: version
+response_envelope:
+  shape: >-
+    Mirrors the request: version, a response[] array, and a secrand security value.
+    Each response carries errorcode ("0" = Ok), errormessage, and (on field errors)
+    errordata naming the offending field.
+  fields: [errorcode, errormessage, errordata, settlestatus, transactionreference, requestreference]
+error_handling:
+  code_field: errorcode
+  message_field: errormessage
+  detail_field: errordata
+  success_value: '0'
+  ref: errors/trust-payments-error-codes.yml
+idempotency:
+  supported: false
+  note: >-
+    Trust Payments does not document an idempotency-key header/field for the Webservices
+    API. Duplicate-submission control is handled by referencing a parenttransactionreference
+    for child transactions (REFUND/SUBSCRIPTION) and by TRANSACTIONQUERY to confirm the
+    final state of an uncertain result (errorcode 60010/60034/70001) before resubmitting.
+transaction_linking:
+  field: parenttransactionreference
+  note: Child transactions (REFUND, SUBSCRIPTION, REVERSAL, THREEDQUERY) reference a parent AUTH/transaction.
+query_and_reconciliation:
+  request_type: TRANSACTIONQUERY
+  note: Search/retrieve transaction details by filters; used to reconcile queued (79000) or uncertain outcomes.
+settlement:
+  field: settlestatus
+  note: Settlement progresses 0/1/10 (authorised, pending) -> 100 (settled); 2 suspended; 3 cancelled/error.
+  ref: errors/trust-payments-decline-codes.yml
+webhooks:
+  supported: true
+  mechanism: URL notifications (HTTPS POST) configured in MyST or via stextraurlnotifyfields.
+  ref: asyncapi/trust-payments-webhooks.yml
+versioning:
+  scheme: version field on the request ("1.00"); no dated/header API version train.
+  ref: lifecycle/trust-payments-lifecycle.yml
+rate_limiting:
+  documented: false
+  note: No public rate-limit signalling documented for the Webservices API.

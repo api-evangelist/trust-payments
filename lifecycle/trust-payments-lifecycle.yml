@@ -1,0 +1,24 @@
+generated: '2026-07-24'
+method: searched
+source: https://status.trustpayments.com/
+docs: https://help.trustpayments.com/hc/en-us
+note: >-
+  Lifecycle posture for the Trust Payments Webservices API. Trust Payments publishes
+  a hosted status page and versions requests via a version field ("1.00") on the STPP
+  JSON envelope rather than a URI/header version train. No formal machine-readable
+  deprecation policy (RFC 8594 Sunset/Deprecation headers) is documented for the
+  server-to-server Webservices API.
+versioning:
+  scheme: request-field
+  current: '1.00'
+  field: version
+  docs: https://help.trustpayments.com/hc/en-us/sections/360005821218-Webservices-API
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No published deprecation policy or Sunset/Deprecation header support for the Webservices API.
+sla:
+  url: https://status.trustpayments.com/
+  uptime_target: null
+status_page: https://status.trustpayments.com/
+deprecated_operations: []

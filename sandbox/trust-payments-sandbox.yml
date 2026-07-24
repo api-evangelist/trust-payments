@@ -1,0 +1,55 @@
+generated: '2026-07-24'
+method: searched
+source: https://help.trustpayments.com/hc/en-us/articles/4403290773905-Testing-card-payments
+docs:
+  - https://help.trustpayments.com/hc/en-us/articles/4403290773905-Testing-card-payments
+  - https://help.trustpayments.com/hc/en-us/articles/6744062639121-Trust-Payments-3DS-Server-Testing-Resources
+  - https://help.trustpayments.com/hc/en-us/articles/4403291371153-Testing-DCC-payments
+note: >-
+  Test vs live is selected by the sitereference: a test sitereference routes requests
+  to the test bank; going live means swapping the test sitereference for the live one.
+  No live funds move in test mode. Values below are published verbatim by Trust
+  Payments and must not be altered.
+environments:
+  selector: sitereference
+  test: Use your assigned TEST sitereference (routes to the test bank).
+  live: Swap the test sitereference for your LIVE sitereference.
+amount_triggers:
+  note: On the test bank the request amount (baseamount, in minor units) drives the simulated outcome.
+  values:
+    - {amount: '700.00', outcome: Declined response (errorcode 70000)}
+    - {amount: '600.10', outcome: Bank System Error (errorcode 60010)}
+    - {amount: '10.50', outcome: Safe/authorised value (no simulated error unless the card itself simulates one)}
+security_codes:
+  - {value: '123', card_types: [VISA, MASTERCARD, DISCOVER]}
+  - {value: '1234', card_types: [AMEX]}
+avs_test_values:
+  address:
+    - {value: 'No 789', result: Matched}
+    - {value: 'No 123', result: Not Matched}
+    - {value: 'No 333', result: Not Checked}
+    - {value: '(blank)', result: Not Given}
+  postcode:
+    - {value: 'TR45 6ST', region: UK, result: Matched}
+    - {value: '55555', region: US, result: Matched}
+    - {value: 'TR12 3ST', region: UK, result: Not Matched}
+    - {value: '12345', region: US, result: Not Matched}
+three_ds_test_cards:
+  version: 3DS v2.2.0
+  frictionless_success:
+    - {type: AMEX, number: '340000000004001'}
+    - {type: DISCOVER, number: '6573700000000009'}
+    - {type: MASTERCARD, number: '5591390000000504'}
+    - {type: VISA, number: '4900490000000501'}
+  authentication_failed:
+    - {type: AMEX, number: '340000000004019'}
+    - {type: DISCOVER, number: '6599999900000313'}
+    - {type: MASTERCARD, number: '5591390000000520'}
+    - {type: VISA, number: '4900490000000519'}
+  note: >-
+    Additional 3DS test cases (attempts, unavailable, rejected, challenge flows,
+    timeouts, methodurl variations) are published in the 3DS Server Testing Resources
+    article; capture the specific case you need from that page.
+basic_test_cards:
+  - {type: VISA, number: '4111111111111111'}
+  - {type: MASTERCARD, number: '5100000000000511'}

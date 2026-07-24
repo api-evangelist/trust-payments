@@ -1,0 +1,47 @@
+# Trust Payments
+
+> Trust Payments (formerly Secure Trading / SecureTrading) is a London-headquartered payment gateway and processor operating across the UK, Europe, and the US. It offers online, in-store POS, unattended, and mobile card acceptance, acquiring, alternative/local payment methods, tokenisation, recurring billing, payouts, and 3-D Secure authentication through its TRU Connect gateway. The developer surface is the Secure Trading Payment Platform (STPP) - a server-to-server JSON Webservices API (AUTH, ACCOUNTCHECK, REFUND, SUBSCRIPTION, TRANSACTIONUPDATE, TRANSACTIONQUERY) - plus a JWT-authenticated client-side JavaScript Library (ST.js) for PCI-reduced hosted card fields, and mobile SDKs. No downloadable OpenAPI is published; production access requires PCI certification, account approval, and credential exchange.
+
+## APIs
+
+- [Webservices API (STPP JSON)](https://help.trustpayments.com/hc/en-us/sections/360005821218-Webservices-API): Server-to-server JSON API for card processing on the TRU Connect gateway. baseURL https://webservices.securetrading.net/json/
+- [Payouts API](https://help.trustpayments.com/hc/en-us/articles/4402771924497-Payouts-with-Webservices-API): Disbursement/payout flows over the Webservices API.
+- [JavaScript Library (ST.js)](https://help.trustpayments.com/hc/en-us/articles/4402754655761--Install-our-library): Client-side hosted card fields + tokenisation, authorised by a server-generated JWT.
+
+## Authentication
+
+- [Authentication profile](authentication/trust-payments-authentication.yml): alias + password credentials scoped to a sitereference (server-to-server); JWT for the JavaScript Library.
+
+## Conventions & Errors
+
+- [API conventions](conventions/trust-payments-conventions.yml): request/response envelope, request types, transaction linking (parenttransactionreference), settlement, versioning.
+- [Error code catalog (255 codes)](errors/trust-payments-error-codes.yml): full published errorcode registry.
+- [Decline codes](errors/trust-payments-decline-codes.yml): authorisation-outcome codes (70000 Decline, 71000 Soft Decline/SCA, 72000 Refer to Issuer) + settlestatus values.
+
+## Testing
+
+- [Sandbox / test data](sandbox/trust-payments-sandbox.yml): test sitereference, amount triggers (700.00 decline, 600.10 bank error), 3DS 2.2.0 test cards, AVS/security-code test values.
+
+## Events
+
+- [Webhooks (URL notifications)](asyncapi/trust-payments-webhooks.yml): HTTPS POST notifications on transaction/settlestatus changes; payload field list.
+
+## SDKs & Components
+
+- [Packages / SDKs](packages/trust-payments-packages.yml): Python (securetrading), PHP (securetrading/stpp_json), and JavaScript/TypeScript helper packages under @trustpayments.
+- [Embedded components](components/trust-payments-components.yml): ST.js hosted fields, Payment Pages, ReactJS + iOS/Swift libraries.
+
+## Operations & Security
+
+- [Lifecycle](lifecycle/trust-payments-lifecycle.yml): version field "1.00"; status page at https://status.trustpayments.com/
+- [Conformance](conformance/trust-payments-conformance.yml): PCI DSS, PSD2 SCA, EMV 3-D Secure 2.2.0, TLS 1.2+, tokenisation.
+- [Domain security](security/trust-payments-domain-security.yml): TLS/HSTS/SPF/DMARC probe results.
+
+## Docs
+
+- [Help centre](https://help.trustpayments.com/hc/en-us)
+- [Webservices API Guide for POS developers](https://help.trustpayments.com/hc/en-us/articles/11569681677713-Webservices-API-Guide-for-POS-developers)
+- [Error codes](https://help.trustpayments.com/hc/en-us/articles/4402897300625-Error-codes)
+- [GitHub organisation (SecureTrading)](https://github.com/SecureTrading)
+- [Status page](https://status.trustpayments.com/)
+- [Pricing](https://www.trustpayments.com/pricing/)

@@ -1,0 +1,46 @@
+generated: '2026-07-24'
+method: searched
+source: https://help.trustpayments.com/hc/en-us/articles/360021197998-URL-notifications-following-payments
+docs:
+  - https://help.trustpayments.com/hc/en-us/articles/4402643049361-URL-notifications
+  - https://help.trustpayments.com/hc/en-us/articles/360021197998-URL-notifications-following-payments
+  - https://help.trustpayments.com/hc/en-us/articles/4402689992593-3-Configure-webhooks
+spec_type: Webhooks
+note: >-
+  Trust Payments exposes an event surface as "URL notifications" (webhooks), not an
+  AsyncAPI document. When a transaction is processed - or when a settlestatus changes
+  (e.g. to 3 or 100) - Trust Payments sends an HTTPS POST to the merchant's configured
+  endpoint. Conditions are configured in MyST ("Add new condition"). No AsyncAPI spec
+  is published, so this captures the webhook catalog verbatim.
+delivery:
+  transport: HTTPS POST
+  port: 443
+  ack: Endpoint must respond HTTP 200 OK within 8 seconds
+  configuration: MyST webhook conditions ("Add new condition"); extra fields via stextraurlnotifyfields
+  recommended_on: JavaScript Library solutions
+events:
+  - name: transaction.processed
+    trigger: A transaction is processed on the site (subject to configured conditions).
+    note: settlestatus 0/1/10 = authorised & pending, no action required; 3 = cancelled/error; 100 = settled.
+  - name: settlestatus.updated
+    trigger: The settle status of an AUTH is updated (e.g. to 3 or 100).
+    note: URL notification informs the merchant that settlestatus has changed.
+payload_fields:
+  - authcode
+  - enrolled
+  - errorcode
+  - expirydate
+  - issuer
+  - issuercountryiso2a
+  - maskedpan
+  - orderreference
+  - paymenttypedescription
+  - requestreference
+  - securityresponseaddress
+  - securityresponsepostcode
+  - settlestatus
+  - sitereference
+  - transactionreference
+extra_fields:
+  mechanism: stextraurlnotifyfields
+  note: Add further fields to the notification by listing them in the HTTPS POST configuration.
