@@ -49,11 +49,6 @@ Payout / disbursement capability exposed through the Webservices API on the TRU 
 
 - [Documentation](https://help.trustpayments.com/hc/en-us/articles/4402771924497-Payouts-with-Webservices-API)
 
-### Trust Payments JavaScript Library (ST.js)
-
-Client-side JavaScript Library for embedding hosted, PCI-reduced card input fields and tokenising payments in the browser. Requests are authorised with a server-generated JSON Web Token (JWT). Distributed via the SecureTrading GitHub organisation with a matching iOS/Swift SDK.
-
-- **Human URL:** [https://help.trustpayments.com/hc/en-us](https://help.trustpayments.com/hc/en-us)
 
 #### Properties
 

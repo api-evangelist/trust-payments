@@ -21,136 +21,110 @@ description: >-
   self-serve.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
-- Payments
-- United Kingdom
-- Payment Gateway
-- Payment Processing
-- Acquiring
-- Card Payments
-- Tokenization
-- Subscriptions
-- 3-D Secure
-- Point of Sale
-- Webhooks
-- Payouts
+  - Payments
+  - United Kingdom
+  - Payment Gateway
+  - Payment Processing
+  - Acquiring
+  - Card Payments
+  - Tokenization
+  - Subscriptions
+  - 3-D Secure
+  - Point of Sale
+  - Webhooks
+  - Payouts
 created: '2026-07-24'
-modified: '2026-07-24'
+modified: '2026-07-25'
 specificationVersion: '0.19'
 apis:
-- aid: trust-payments:webservices-api
-  name: Trust Payments Webservices API
-  description: Server-to-server JSON API (the Secure Trading Payment Platform / STPP)
-    for card processing and management on the TRU Connect gateway. Supports request
-    types including AUTH, ACCOUNTCHECK, REFUND, SUBSCRIPTION, TRANSACTIONUPDATE, and
-    TRANSACTIONQUERY. Authenticated with a Webservices API alias (username) and
-    password scoped to a site reference; production use requires PCI certification
-    and credential exchange. No downloadable OpenAPI is published.
-  humanURL: https://help.trustpayments.com/hc/en-us/sections/360005821218-Webservices-API
-  baseURL: https://webservices.securetrading.net/json/
-  tags:
-  - Payments
-  - Card Payments
-  - Processing
-  - Acquiring
-  properties:
-  - type: Documentation
-    url: https://help.trustpayments.com/hc/en-us/sections/360005821218-Webservices-API
-  - type: APIReference
-    url: https://help.trustpayments.com/hc/en-us/articles/11569681677713-Webservices-API-Guide-for-POS-developers
-  - type: Documentation
-    url: https://help.trustpayments.com/hc/en-us/articles/4402754655761--Install-our-library
-- aid: trust-payments:payouts-api
-  name: Trust Payments Payouts API
-  description: Payout / disbursement capability exposed through the Webservices API,
-    used to send funds out (for example refunds beyond original transactions and
-    supported payout flows) via the STPP JSON interface on the TRU Connect gateway.
-    Same alias/password + site reference authentication as the core Webservices API.
-  humanURL: https://help.trustpayments.com/hc/en-us/articles/4402771924497-Payouts-with-Webservices-API
-  baseURL: https://webservices.securetrading.net/json/
-  tags:
-  - Payouts
-  - Disbursements
-  - Payments
-  properties:
-  - type: Documentation
-    url: https://help.trustpayments.com/hc/en-us/articles/4402771924497-Payouts-with-Webservices-API
-  - type: APIReference
-    url: https://help.trustpayments.com/hc/en-us/sections/360005821218-Webservices-API
-- aid: trust-payments:javascript-library
-  name: Trust Payments JavaScript Library (ST.js)
-  description: Client-side JavaScript Library for embedding hosted, PCI-reduced card
-    input fields and tokenising payments in the browser. Requests are authorised
-    with a JSON Web Token (JWT) generated server-side, keeping raw card data off the
-    merchant server. Distributed via the SecureTrading GitHub organisation
-    (js-payments, reactjs-payments) with a matching iOS/Swift SDK.
-  humanURL: https://help.trustpayments.com/hc/en-us
-  tags:
-  - JavaScript
-  - Tokenization
-  - JWT
-  - Hosted Fields
-  properties:
+  - aid: trust-payments:webservices-api
+    name: Trust Payments Webservices API
+    description: Server-to-server JSON API (the Secure Trading Payment Platform / STPP) for card processing and management on the TRU Connect gateway. Supports request types including AUTH, ACCOUNTCHECK, REFUND, SUBSCRIPTION, TRANSACTIONUPDATE, and TRANSACTIONQUERY. Authenticated with a Webservices API alias (username) and password scoped to a site reference; production use requires PCI certification and credential exchange. No downloadable OpenAPI is published.
+    humanURL: https://help.trustpayments.com/hc/en-us/sections/360005821218-Webservices-API
+    baseURL: https://webservices.securetrading.net/json/
+    tags:
+      - Payments
+      - Card Payments
+      - Processing
+      - Acquiring
+    properties:
+      - type: Documentation
+        url: https://help.trustpayments.com/hc/en-us/sections/360005821218-Webservices-API
+      - type: APIReference
+        url: https://help.trustpayments.com/hc/en-us/articles/11569681677713-Webservices-API-Guide-for-POS-developers
+      - type: Documentation
+        url: https://help.trustpayments.com/hc/en-us/articles/4402754655761--Install-our-library
+  - aid: trust-payments:payouts-api
+    name: Trust Payments Payouts API
+    description: Payout / disbursement capability exposed through the Webservices API, used to send funds out (for example refunds beyond original transactions and supported payout flows) via the STPP JSON interface on the TRU Connect gateway. Same alias/password + site reference authentication as the core Webservices API.
+    humanURL: https://help.trustpayments.com/hc/en-us/articles/4402771924497-Payouts-with-Webservices-API
+    baseURL: https://webservices.securetrading.net/json/
+    tags:
+      - Payouts
+      - Disbursements
+      - Payments
+    properties:
+      - type: Documentation
+        url: https://help.trustpayments.com/hc/en-us/articles/4402771924497-Payouts-with-Webservices-API
+      - type: APIReference
+        url: https://help.trustpayments.com/hc/en-us/sections/360005821218-Webservices-API
+common:
+  - type: DomainSecurity
+    url: security/trust-payments-domain-security.yml
+  - type: Website
+    url: https://www.trustpayments.com/
   - type: Documentation
     url: https://help.trustpayments.com/hc/en-us
-  - type: SourceCode
+  - type: APIReference
+    url: https://help.trustpayments.com/hc/en-us/sections/360005821218-Webservices-API
+  - type: GitHubOrganization
     url: https://github.com/SecureTrading
-common:
-- type: DomainSecurity
-  url: security/trust-payments-domain-security.yml
-- type: Website
-  url: https://www.trustpayments.com/
-- type: Documentation
-  url: https://help.trustpayments.com/hc/en-us
-- type: APIReference
-  url: https://help.trustpayments.com/hc/en-us/sections/360005821218-Webservices-API
-- type: GitHubOrganization
-  url: https://github.com/SecureTrading
-- type: StatusPage
-  url: https://status.trustpayments.com/
-- type: Pricing
-  url: https://www.trustpayments.com/pricing/
-- type: Blog
-  url: https://www.trustpayments.com/blog/
-- type: HelpCenter
-  url: https://help.trustpayments.com/hc/en-us
-- type: Login
-  url: https://myst.trustpayments.com/
-- type: TermsOfService
-  url: https://www.trustpayments.com/terms-of-use/
-- type: PrivacyPolicy
-  url: https://www.trustpayments.com/privacy-policy/
-- type: DeveloperPortal
-  url: https://www.trustpayments.com/developers/
-- type: GettingStarted
-  url: https://www.trustpayments.com/get-started/
-- type: Support
-  url: https://www.trustpayments.com/contact-us/
-- type: Authentication
-  url: authentication/trust-payments-authentication.yml
-- type: Conventions
-  url: conventions/trust-payments-conventions.yml
-- type: ErrorCatalog
-  url: errors/trust-payments-error-codes.yml
-- type: DeclineCodes
-  url: errors/trust-payments-decline-codes.yml
-- type: Sandbox
-  url: sandbox/trust-payments-sandbox.yml
-- type: Lifecycle
-  url: lifecycle/trust-payments-lifecycle.yml
-- type: Conformance
-  url: conformance/trust-payments-conformance.yml
-- type: Compliance
-  url: https://www.trustpayments.com/security/
-- type: Webhooks
-  url: asyncapi/trust-payments-webhooks.yml
-- type: Packages
-  url: packages/trust-payments-packages.yml
-- type: SDKs
-  url: packages/trust-payments-packages.yml
-- type: Components
-  url: components/trust-payments-components.yml
-- type: LLMsTxt
-  url: llms/trust-payments-llms.txt
+  - type: StatusPage
+    url: https://status.trustpayments.com/
+  - type: Pricing
+    url: https://www.trustpayments.com/pricing/
+  - type: Blog
+    url: https://www.trustpayments.com/blog/
+  - type: HelpCenter
+    url: https://help.trustpayments.com/hc/en-us
+  - type: Login
+    url: https://myst.trustpayments.com/
+  - type: TermsOfService
+    url: https://www.trustpayments.com/terms-of-use/
+  - type: PrivacyPolicy
+    url: https://www.trustpayments.com/privacy-policy/
+  - type: DeveloperPortal
+    url: https://www.trustpayments.com/developers/
+  - type: GettingStarted
+    url: https://www.trustpayments.com/get-started/
+  - type: Support
+    url: https://www.trustpayments.com/contact-us/
+  - type: Authentication
+    url: authentication/trust-payments-authentication.yml
+  - type: Conventions
+    url: conventions/trust-payments-conventions.yml
+  - type: ErrorCatalog
+    url: errors/trust-payments-error-codes.yml
+  - type: DeclineCodes
+    url: errors/trust-payments-decline-codes.yml
+  - type: Sandbox
+    url: sandbox/trust-payments-sandbox.yml
+  - type: Lifecycle
+    url: lifecycle/trust-payments-lifecycle.yml
+  - type: Conformance
+    url: conformance/trust-payments-conformance.yml
+  - type: Compliance
+    url: https://www.trustpayments.com/security/
+  - type: Webhooks
+    url: asyncapi/trust-payments-webhooks.yml
+  - type: Packages
+    url: packages/trust-payments-packages.yml
+  - type: SDKs
+    url: packages/trust-payments-packages.yml
+  - type: Components
+    url: components/trust-payments-components.yml
+  - type: LLMsTxt
+    url: llms/trust-payments-llms.txt
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
