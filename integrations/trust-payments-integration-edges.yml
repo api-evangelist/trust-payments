@@ -2,6 +2,7 @@ generated: '2026-10-13'
 method: searched
 checked:
 - https://aws.amazon.com/marketplace/
+- wordpress/integrations/wordpress-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -20,3 +21,22 @@ edges:
   seller_name: Trust Payments
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: WordPress (own)
+  partner: wordpress
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://wordpress.org/plugins/trust-payments-hosted-payment-pages-integration/
+  mirror_of: wordpress/integrations/wordpress-integration-edges.yml
+  apps:
+  - Trust Payments Gateway for WooCommerce
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: WordPress plugin
+source:
+- wordpress/integrations/wordpress-integration-edges.yml
