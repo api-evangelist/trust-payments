@@ -1,7 +1,14 @@
 generated: '2026-10-13'
 method: searched
 checked:
+- https://api.nuget.org/v3
 - https://aws.amazon.com/marketplace/
+- https://crates.io/api/v1
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
 - wordpress/integrations/wordpress-integration-edges.yml
 marketplace_apps: []
 edges:
@@ -38,5 +45,62 @@ edges:
   detected: '2026-10-15'
   detected_by: mirror-platform-listings.py
   category: WordPress plugin
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@trustpayments/js-payments-card
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@trustpayments/js-payments-card'
+      version: 2.2.1224
+      released: '2026-10-16'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@trustpayments/js-payments-card
+      repo_leg: domain:trustpayments.com
+      publisher_leg: email:trustpayments.com
+      matched_by: domain
+    - name: '@trustpayments/jwt-generator'
+      version: 2.0.721
+      released: '2026-10-13'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@trustpayments/jwt-generator
+      repo_leg: domain:trustpayments.com
+      publisher_leg: email:trustpayments.com
+      matched_by: domain
+    - name: '@trustpayments/ts-iin-lookup'
+      version: 2.0.721
+      released: '2026-10-13'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@trustpayments/ts-iin-lookup
+      repo_leg: domain:trustpayments.com
+      publisher_leg: email:trustpayments.com
+      matched_by: domain
+    - name: '@trustpayments/ts-luhn-check'
+      version: 2.0.721
+      released: '2026-10-13'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@trustpayments/ts-luhn-check
+      repo_leg: domain:trustpayments.com
+      publisher_leg: email:trustpayments.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
 source:
 - wordpress/integrations/wordpress-integration-edges.yml
